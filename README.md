@@ -50,5 +50,32 @@ class Solution:
         return ''.join(itog[:i])
 
 ```
-
 ---
+
+## 3. [274. H-Index](https://leetcode.com/problems/h-index/)
+* **Сложность:** Medium
+<img width="1919" height="948" alt="image" src="https://github.com/user-attachments/assets/e454a61e-b7fe-4f92-b03a-2e6218860a7b" />
+
+### Решение
+
+Начинаем с h=0, и каждый раз проверяем сколько статей >= h, это количество по условию должно быть >= h если верно, то прибавляем h+1 и так до победного
+### Код
+
+```python
+class Solution:
+    def hIndex(self, citations: list[int]) -> int:
+        max_H = len(citations)
+        last_h = 0
+        h = 0
+        while True:
+            flag = True
+            cnt = 0
+            for cit in citations:
+                if cit >= h: cnt += 1
+            if cnt >= h:
+                last_h = h
+                h += 1
+                flag = False
+            if flag:
+                return last_h
+```
